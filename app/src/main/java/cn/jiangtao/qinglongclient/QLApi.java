@@ -80,13 +80,4 @@ public class QLApi {
     }
 
 
-    public static final class Result {
-        int code;
-        String message;
-        Object data;
-
-
-    }
-
-
 }
