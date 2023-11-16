@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private Button viewCookieButton;
     private Button copyCookieButton;
     private Button uploadCookieButton;
+
+    private String token;
 
     private static final int PERMISSION_REQUEST_READ_PHONE_STATE = 1;
 
@@ -95,6 +98,70 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        login();
+    }
+
+    private void login() {
+
+
+        Request request = new Request.Builder()
+                .url("http://soulsoup.cn:5700/open/auth/token?client_id=Bx-SAI5gHE4D&client_secret=_Pw8yO6tT7QrK6Rf4CgUrUmS")
+                .get()
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "登录失败" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String rsBody = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+
+                            if (response.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+
+                                JSONObject rs = new JSONObject(rsBody);
+
+                                if (rs.getInt("code") == 200) {
+                                    String tokenType = rs.getJSONObject("data").getString("token_type");
+                                    String tokenValue = rs.getJSONObject("data").getString("token");
+                                    token = tokenType + " " + tokenValue;
+                                } else {
+                                    Toast.makeText(MainActivity.this, "登录失败" + rs.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+
+
+                            } else {
+                                Toast.makeText(MainActivity.this, "登录失败" + response.message(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(MainActivity.this, "登录失败" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+
+                });
+
+
+            }
+        });
     }
 
     private void uploadCookie() {
@@ -106,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             jsonObject.put("id", getDevicePhoneNumber());
             jsonObject.put("remarks", getDevicePhoneNumber());
             jsonObject.put("name", "JD_COOKIE");
-            jsonObject.put("value", cookies);
+            jsonObject.put("value", Arrays.asList(cookies) );
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -115,7 +182,8 @@ public class MainActivity extends AppCompatActivity {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(mediaType, jsonObject.toString());
         Request request = new Request.Builder()
-                .url("http://soulsoup.cn:5700/api/envs?client_id=Bx-SAI5gHE4D&client_secret=_Pw8yO6tT7QrK6Rf4CgUrUmS")
+                .url("http://soulsoup.cn:5700/open/envs")
+                .addHeader("Authorization", token)
                 .post(body)
                 .build();
 
@@ -135,13 +203,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                String rsBody = response.body().string();
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (response.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "上传 Cookie 成功", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity.this, "上传 Cookie 失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, rsBody, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
