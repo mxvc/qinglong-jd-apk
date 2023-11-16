@@ -57,12 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 隐藏标题
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_main);
-
-
 
         webView = findViewById(R.id.webView);
         uploadCookieButton = findViewById(R.id.uploadCookieButton);
@@ -113,15 +108,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadCookie() {
-        String deviceInfo = getDeviceInfo();
         String cookies = CookieManager.getInstance().getCookie(webView.getUrl());
 
         String[] cs = cookies.split(";");
 
+        String pin = null;
         StringBuilder sb = new StringBuilder();
         for (String c : cs) {
             if(c.contains("pt_key") || c.contains("pt_pin")){
                 sb.append(c.trim()).append(";");
+            }
+            if(c.contains("pt_pin")){
+                pin = c.replace("pt_pin=","").trim();
             }
         }
         if (sb.length() == 0) {
@@ -130,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        String finalPin = pin;
         new Thread() {
             @Override
             public void run() {
@@ -138,15 +137,15 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i < list.length(); i++){
                         JSONObject  o = (JSONObject) list.get(i);
 
-                        if(o.getString("remarks").equals(deviceInfo)){
+                        if(o.getString("value").contains(finalPin)){
                             api.delete(o.getInt("id"));
-                            info("删除" + deviceInfo +"成功");
+                            info("删除" + finalPin +"成功");
                         }
 
                     }
 
                     JSONObject param = new JSONObject();
-                    param.put("remarks", deviceInfo);
+                    param.put("remarks", Build.BRAND + " "+ finalPin);
                     param.put("name", "JD_COOKIE");
                     param.put("value", sb.toString());
 
@@ -163,10 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private String getDeviceInfo() {
-        String info = Build.FINGERPRINT;
-        return info;
-    }
+
 
 
 }
