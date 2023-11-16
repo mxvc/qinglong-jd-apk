@@ -124,43 +124,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                Toast.makeText(MainActivity.this, "上传 Cookie 失败", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "上传 Cookie 失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "上传 Cookie 成功", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "上传 Cookie 失败", Toast.LENGTH_SHORT).show();
-                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "上传 Cookie 成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "上传 Cookie 失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
             }
         });
     }
 
     private String getDevicePhoneNumber() {
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                return telephonyManager.getLine1Number();
-            } else {
-                return telephonyManager.getSimSerialNumber();
-            }
-        }
-        return null;
+        String phoneModel = Build.MODEL;
+        return phoneModel;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_READ_PHONE_STATE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 获取手机号权限已授予，执行上传逻辑
-                uploadCookie();
-            } else {
-                // 获取手机号权限被拒绝
-                Toast.makeText(this, "获取手机号权限被拒绝，无法上传", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+
 }
