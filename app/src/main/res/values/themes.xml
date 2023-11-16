@@ -1,6 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.QinglongClient" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-
-    </style>
-</resources>

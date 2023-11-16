@@ -7,7 +7,7 @@
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="600dp" />
+        android:layout_height="650dp" />
 
 
 
@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="上传 Cookie" />
+        android:text="上传Cookie到青龙" />
 
 </RelativeLayout>
