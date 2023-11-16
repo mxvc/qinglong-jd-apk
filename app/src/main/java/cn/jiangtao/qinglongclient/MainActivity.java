@@ -37,7 +37,6 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private WebView webView;
-    private Button viewCookieButton;
     private Button copyCookieButton;
     private Button uploadCookieButton;
 
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         webView = findViewById(R.id.webView);
-        viewCookieButton = findViewById(R.id.viewCookieButton);
         copyCookieButton = findViewById(R.id.copyCookieButton);
         uploadCookieButton = findViewById(R.id.uploadCookieButton);
 
@@ -61,14 +59,7 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://m.jd.com");
 
-        // 查看 Cookie
-        viewCookieButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String cookies = CookieManager.getInstance().getCookie(webView.getUrl());
-                Toast.makeText(MainActivity.this, "Cookie:\n" + cookies, Toast.LENGTH_LONG).show();
-            }
-        });
+
 
         // 复制 Cookie
         copyCookieButton.setOnClickListener(new View.OnClickListener() {

@@ -9,14 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/viewCookieButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="8dp"
-        android:text="查看 Cookie" />
 
     <Button
         android:id="@+id/copyCookieButton"
