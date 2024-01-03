@@ -1,6 +1,8 @@
-青龙脚本，京东cookie上传客户端
+青龙脚本，京东cookie上传APP
 
-![img.png](img.png)
+![doc/app.png](doc/app.png)
+
+![doc/web.png](doc/web.png)
 
 
 
