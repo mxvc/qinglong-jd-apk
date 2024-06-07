@@ -14,9 +14,8 @@
 3. 在github右侧，创建一个release， 如v1.0.0。 等待一段时间就会构建出apk了
 
 
+# 其他
+接口参考文档：https://qinglong.ukenn.top
 
-参考文档：
-https://qinglong.ukenn.top
-
-密钥
-key0 123123
+密钥： 123123
+alias(别名): key0 
