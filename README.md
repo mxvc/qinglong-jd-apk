@@ -1,4 +1,4 @@
-青龙脚本，京东cookie上传APP
+青龙脚本，京东cookie获取上传APP
 
 ![doc/app.png](doc/app.png)
 
