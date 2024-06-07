@@ -1,8 +1,15 @@
+# 介绍
 青龙脚本，京东cookie获取上传APP
 
 ![doc/app.png](doc/app.png)
 
 ![doc/web.png](doc/web.png)
+
+
+# 使用方式
+1. fork 本项目
+2. 修改代码中的一些配置，如服务器地址，等
+3. 在github右侧，创建一个release， 如v1.0.0。 等待一段时间就会构建出apk了
 
 
 
