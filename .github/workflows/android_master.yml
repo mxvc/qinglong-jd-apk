@@ -25,14 +25,15 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Sign AAB
-      id: sign_aab
-      uses: r0adkll/sign-android-release@v1
+    - name: sign apk
+      uses: upup-company/apksigner-android@v1
       with:
         releaseDirectory: app/build/outputs/bundle/release
         signingKeyBase64: MTIzMTIz
         alias: key0
-    - run: echo "Build status report=${{ job.status }}."
+        keyStorePassword: ""
+        keyPassword: ""
+    - run: ls app/build/outputs/bundle/release
     - name: Upload App Bundle
       uses: actions/upload-artifact@v1
       with:
