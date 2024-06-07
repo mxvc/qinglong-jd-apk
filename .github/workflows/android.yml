@@ -24,8 +24,7 @@ jobs:
       with:
         gradle-version: current
         arguments: assembleRelease
-    - name: Build with Gradle
-      run: ./gradlew build
+   
 
     - name: Release
       uses: softprops/action-gh-release@v2
