@@ -2,14 +2,15 @@ name: Android CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -24,3 +25,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          *.apk
