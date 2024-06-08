@@ -90,10 +90,6 @@ AgInEA=="
         keyPassword: 123123
       env:
         BUILD_TOOLS_VERSION: "33.0.3"
-    - run: ls app/build/outputs/apk/release
-    - run: echo ${{steps.sign_app.outputs.signedReleaseFile}}
-
-    
     - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
