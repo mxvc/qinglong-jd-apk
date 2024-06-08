@@ -1,22 +1,28 @@
-name: Auto-Release
+---
+name: "pre-release"
 
 on:
   push:
     branches:
-      - master
-
-permissions:
-  contents: write # Required to create releases
-  pull-requests: write # Required to create comments on the PRs
+      - "master"
 
 jobs:
-  Auto-Release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+  pre-release:
+    name: "Pre Release"
+    runs-on: "ubuntu-latest"
 
-      - name: Auto-Release
-        uses: PSModule/Auto-Release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }} # Used for GitHub CLI authentication
+    steps:
+      # ...
+      - name: "Build & test"
+        run: |
+          echo "done!"
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            LICENSE.txt
+            *.md
