@@ -14,13 +14,19 @@
 3. 在github右侧，创建一个release， 如v1.0.0。 等待一段时间就会构建出apk了
 
 
-# 其他
+# 笔记
 接口参考文档：https://qinglong.ukenn.top
 
-# 签名相关
+## 签名相关
 jks 在docs目录下
 密码： 123123
 alias(别名): key0 
+
+## github actions
+需要生成base64时， 使用 gitbash 打开jks文件所在目录（docs）， 执行
+```
+openssl base64 < qinglong-client.jks | tr -d '\n' | tee some_signing_key.jks.base64.txt
+```
 
 
 
