@@ -24,6 +24,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - run: ls app/build/outputs/apk/release
+    - run: ls /usr/local/lib/android/sdk/build-tools/
 
 
 
