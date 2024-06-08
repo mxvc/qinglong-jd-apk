@@ -1,4 +1,4 @@
-package cn.jiangtao.qinglongclient;
+package cn.moon.ql;
 
 public class Config {
 
