@@ -93,8 +93,5 @@ AgInEA=="
     - run: ls app/build/outputs/apk/release
     - run: echo ${{steps.sign_app.outputs.signedReleaseFile}}
 
-    - name: Upload App
-      uses: actions/upload-artifact@v2
-      with:
-        name: Signed app
-        path: ${{steps.sign_app.outputs.signedReleaseFile}}
+    - name: Release
+      uses: softprops/action-gh-release@v2
