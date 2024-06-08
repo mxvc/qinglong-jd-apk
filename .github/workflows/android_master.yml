@@ -19,8 +19,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+#    - name: Setup Android SDK
+#      uses: android-actions/setup-android@v3
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -32,6 +32,7 @@ jobs:
 
 
     - name: sign apk
+      id: sign_app
       uses: upup-company/apksigner-android@v1
       with:
         releaseDirectory: app/build/outputs/apk/release
@@ -94,6 +95,7 @@ AgInEA=="
       env:
         BUILD_TOOLS_VERSION: "33.0.3"
     - run: ls app/build/outputs/apk/release
+    - run: echo ${{steps.sign_app.outputs.signedReleaseFile}}
     - name: Upload App Bundle
       uses: actions/upload-artifact@v1
       with:
