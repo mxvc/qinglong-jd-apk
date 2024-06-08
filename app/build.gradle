@@ -7,7 +7,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "cn.jiangtao.qinglongclient"
+        applicationId "cn.moon.ql"
         minSdk 24
         targetSdk 33
         versionCode 1
