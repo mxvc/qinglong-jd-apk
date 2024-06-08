@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write # Required to create releases
+  pull-requests: write # Required to create comments on the PRs
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
