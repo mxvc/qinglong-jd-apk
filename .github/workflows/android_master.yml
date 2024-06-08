@@ -28,7 +28,7 @@ jobs:
     - name: sign apk
       uses: upup-company/apksigner-android@v1
       with:
-        releaseDirectory: app/build/outputs/apk
+        releaseDirectory: app/build/outputs/apk/release
         signingKeyBase64: "MIIJwAIBAzCCCWoGCSqGSIb3DQEHAaCCCVsEgglXMIIJUzCCBaoGCSqGSIb3DQEH
 AaCCBZsEggWXMIIFkzCCBY8GCyqGSIb3DQEMCgECoIIFQDCCBTwwZgYJKoZIhvcN
 AQUNMFkwOAYJKoZIhvcNAQUMMCsEFKlI3rH07T3J6aNCnD9OXob6XwkqAgInEAIB
