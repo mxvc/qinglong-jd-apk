@@ -19,5 +19,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           title: "Development Build"
+          prerelease: false
           files: |
             README.md
