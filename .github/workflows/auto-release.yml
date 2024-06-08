@@ -18,8 +18,8 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          title: "Development Build"
+          automatic_release_tag: "$(date +'%Y-%m-%d')"
+          title: "apk打包结果"
           prerelease: false
           files: |
             README.md
