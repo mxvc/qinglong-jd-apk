@@ -4,9 +4,9 @@
 - 手机使用app登录后，自动将cookie上传到青龙脚本服务器
 
 ## 界面
-![doc/app.png](docs/app.png)
+![docs/app.png](docs/app.png)
 
-![doc/web.png](docs/web.png)
+![docs/web.png](docs/web.png)
 
 
 # 使用方式
