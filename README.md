@@ -1,7 +1,7 @@
 # 介绍
 青龙脚本，京东cookie获取上传APP
-- 手机使用app，无需电脑
-- 手机使用app登录后，自动将cookie上传到青龙脚本服务器
+- 手机使用app
+- 登录后，自动将cookie上传到青龙脚本服务器
 
 ## 界面
 ![docs/app.png](docs/app.png)
