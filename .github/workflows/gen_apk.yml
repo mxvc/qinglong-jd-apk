@@ -91,10 +91,10 @@ AgInEA=="
       env:
         BUILD_TOOLS_VERSION: "33.0.3"
     - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{github.run_id}}
-          title: "apk打包结果"
-          prerelease: false
-          files: |
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: ${{github.run_id}}
+        title: "apk打包结果"
+        prerelease: false
+        files: |
             ${{steps.sign_app.outputs.signedReleaseFile}}
