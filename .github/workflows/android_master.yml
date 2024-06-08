@@ -25,7 +25,7 @@ jobs:
       run: ./gradlew build
     - run: ls app/build/outputs/apk/release
     - run: ls /usr/local/lib/android/sdk/build-tools/
-    - run: tree -y
+    - run: sudo apt-get install tree && tree -y
 
 
 
