@@ -11,7 +11,7 @@
 # 使用方式
 1. fork 本项目
 2. 修改代码Config.java中的青龙后台地址，CLIENT_ID,CLIENT_SECRET。 (需在青龙脚本后台创建一个api接口)
-3. 在github右侧，创建一个release， 如v1.0.0。 等待一段时间就会构建出apk了
+3. 等待一段时间就会构建出apk了 ，在右侧Releases菜单下可见
 
 
 # 笔记
