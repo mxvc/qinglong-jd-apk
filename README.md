@@ -17,7 +17,9 @@
 # 其他
 接口参考文档：https://qinglong.ukenn.top
 
-密钥： 123123
+# 签名相关
+jks 在docs目录下
+密码： 123123
 alias(别名): key0 
 
 
