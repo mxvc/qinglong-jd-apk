@@ -3,9 +3,9 @@
 - 手机使用app，无需电脑
 - 手机使用app登录后，点击上传，会自动将cookie上传到青龙脚本服务器
 
-![doc/app.png](doc/app.png)
+![doc/app.png](docs/app.png)
 
-![doc/web.png](doc/web.png)
+![doc/web.png](docs/web.png)
 
 
 # 使用方式

@@ -28,7 +28,7 @@ jobs:
     - name: sign apk
       uses: upup-company/apksigner-android@v1
       with:
-        releaseDirectory: app/build/outputs/bundle/release
+        releaseDirectory: app/build/outputs/apk
         signingKeyBase64: "MIIJwAIBAzCCCWoGCSqGSIb3DQEHAaCCCVsEgglXMIIJUzCCBaoGCSqGSIb3DQEH
 AaCCBZsEggWXMIIFkzCCBY8GCyqGSIb3DQEMCgECoIIFQDCCBTwwZgYJKoZIhvcN
 AQUNMFkwOAYJKoZIhvcNAQUMMCsEFKlI3rH07T3J6aNCnD9OXob6XwkqAgInEAIB
@@ -83,8 +83,8 @@ q79ZKWMsxtbkBAjaiOqlptom8aTSME0wMTANBglghkgBZQMEAgEFAAQgrnCRLPUj
 dweWd2xJoNFsA+H6hKI3GM7jGO7DBLOzH4AEFBcVg7/EKE1gzYLfZHSi75PQrRem
 AgInEA=="
         alias: key0
-        keyStorePassword: ""
-        keyPassword: ""
+        keyStorePassword: 123123
+        keyPassword: 123123
     - run: ls app/build/outputs/bundle/release
     - name: Upload App Bundle
       uses: actions/upload-artifact@v1
