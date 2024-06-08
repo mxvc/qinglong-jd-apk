@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'cn.jiangtao.qinglongclient'
+    namespace 'cn.moon.ql'
     compileSdk 33
 
     defaultConfig {
