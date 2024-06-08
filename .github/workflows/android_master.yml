@@ -85,7 +85,7 @@ AgInEA=="
         alias: key0
         keyStorePassword: 123123
         keyPassword: 123123
-    - run: ls app/build/outputs/bundle/release
+    - run: ls app/build/outputs/apk/release
     - name: Upload App Bundle
       uses: actions/upload-artifact@v1
       with:
