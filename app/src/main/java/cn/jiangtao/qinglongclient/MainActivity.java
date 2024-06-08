@@ -1,16 +1,12 @@
 package cn.jiangtao.qinglongclient;
 
-import android.Manifest;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.pm.PackageManager;
+import static cn.jiangtao.qinglongclient.Config.JD_COOKIE;
+import static cn.jiangtao.qinglongclient.Config.JD_URL;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.view.Window;
 import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -20,24 +16,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 public class MainActivity extends AppCompatActivity {
+
 
     private WebView webView;
     private Button uploadCookieButton;
@@ -66,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("https://m.jd.com");
+        webView.loadUrl(JD_URL);
 
 
         // 上传 Cookie
@@ -146,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject param = new JSONObject();
                     param.put("remarks", Build.BRAND + " "+ finalPin);
-                    param.put("name", "JD_COOKIE");
+                    param.put("name", JD_COOKIE);
                     param.put("value", sb.toString());
 
 

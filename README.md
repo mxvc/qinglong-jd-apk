@@ -1,7 +1,7 @@
 # 介绍
 青龙脚本，京东cookie获取上传APP
 - 手机使用app，无需电脑
-- 手机使用app登录后，点击上传，会自动将cookie上传到青龙脚本服务器
+- 手机使用app登录后，自动将cookie上传到青龙脚本服务器
 
 ![doc/app.png](docs/app.png)
 
@@ -10,7 +10,7 @@
 
 # 使用方式
 1. fork 本项目
-2. 修改代码中的一些配置，如服务器地址，等
+2. 修改代码Config.java中的青龙后台地址，CLIENT_ID,CLIENT_SECRET。 (需在青龙脚本后台创建一个api接口)
 3. 在github右侧，创建一个release， 如v1.0.0。 等待一段时间就会构建出apk了
 
 

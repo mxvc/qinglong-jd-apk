@@ -1,5 +1,9 @@
 package cn.jiangtao.qinglongclient;
 
+import static cn.jiangtao.qinglongclient.Config.QL_URL;
+import static cn.jiangtao.qinglongclient.Config.CLIENT_ID;
+import static cn.jiangtao.qinglongclient.Config.CLIENT_SECRET;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,13 +14,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class QLApi {
-    public static final String URL = "http://soulsoup.cn:5700";
+
+
     private String token;
     OkHttpClient client = new OkHttpClient();
 
 
     public void login() throws Exception {
-        JSONObject data = (JSONObject) this.send("/open/auth/token?client_id=Bx-SAI5gHE4D&client_secret=_Pw8yO6tT7QrK6Rf4CgUrUmS", "GET", null);
+        JSONObject data = (JSONObject) this.send("/open/auth/token?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET, "GET", null);
 
         String tokenType = data.getString("token_type");
         String tokenValue = data.getString("token");
@@ -52,7 +57,7 @@ public class QLApi {
             builder.addHeader("Authorization", token);
         }
         Request request = builder
-                .url(URL + uri)
+                .url(QL_URL + uri)
                 .method(method, body)
                 .build();
         Response response = client.newCall(request).execute();
