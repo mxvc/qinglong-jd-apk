@@ -90,7 +90,7 @@ AgInEA=="
         keyPassword: 123123
       env:
         BUILD_TOOLS_VERSION: "33.0.3"
-    - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: ${{github.run_id}}
