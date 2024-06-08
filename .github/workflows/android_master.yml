@@ -96,8 +96,9 @@ AgInEA=="
         BUILD_TOOLS_VERSION: "33.0.3"
     - run: ls app/build/outputs/apk/release
     - run: echo ${{steps.sign_app.outputs.signedReleaseFile}}
-    - name: Upload App Bundle
-      uses: actions/upload-artifact@v1
+
+    - name: Upload App
+      uses: actions/upload-artifact@v2
       with:
-        name: aab
-        path: ${{steps.sign_aab.outputs.signedReleaseFile}}
+        name: Signed app
+        path: ${{steps.sign_app.outputs.signedReleaseFile}}
