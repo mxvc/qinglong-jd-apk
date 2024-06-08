@@ -1,7 +1,7 @@
-package cn.jiangtao.qinglongclient;
+package cn.moon.ql;
 
-import static cn.jiangtao.qinglongclient.Config.JD_COOKIE;
-import static cn.jiangtao.qinglongclient.Config.JD_URL;
+import static cn.moon.ql.Config.JD_COOKIE;
+import static cn.moon.ql.Config.JD_URL;
 
 import android.os.Build;
 import android.os.Bundle;
