@@ -1,8 +1,8 @@
-package cn.jiangtao.qinglongclient;
+package cn.moon.ql;
 
-import static cn.jiangtao.qinglongclient.Config.QL_URL;
-import static cn.jiangtao.qinglongclient.Config.CLIENT_ID;
-import static cn.jiangtao.qinglongclient.Config.CLIENT_SECRET;
+import static cn.moon.ql.Config.QL_URL;
+import static cn.moon.ql.Config.CLIENT_ID;
+import static cn.moon.ql.Config.CLIENT_SECRET;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
