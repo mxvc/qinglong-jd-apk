@@ -2,12 +2,12 @@ package cn.moon.ql;
 
 public class Config {
 
-    // 青龙后台 地址
-    public static final String QL_URL = "http://soulsoup.cn:5700";
+    // 青龙后台地址，请修改
+    public static final String QL_URL = "http://13.212.144.45:5701";
 
-    // 接口信息
-    public static final String CLIENT_ID = "Bx-SAI5gHE4D";
-    public static final String CLIENT_SECRET = "_Pw8yO6tT7QrK6Rf4CgUrUmS";
+    // 接口信息，请修改
+    public static final String CLIENT_ID = "0TPSFc-0r8Yj";
+    public static final String CLIENT_SECRET = "9b4kmwbZQZkd99cmSKW-_QIL";
 
 
 
