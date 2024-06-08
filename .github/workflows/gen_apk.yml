@@ -95,3 +95,6 @@ AgInEA=="
 
     - name: Release
       uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          ${{steps.sign_app.outputs.signedReleaseFile}}
