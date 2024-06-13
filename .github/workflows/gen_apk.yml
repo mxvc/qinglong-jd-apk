@@ -36,7 +36,6 @@ jobs:
       run: ./gradlew build
     - run: cd app/build/outputs/apk/release && mv *.apk qinglong-jd-$(date '+%Y%m%d%H%M%S').apk
 
-
     - name: 签名 apk
       id: sign_app
       uses: upup-company/apksigner-android@v1
