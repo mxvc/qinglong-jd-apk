@@ -20,7 +20,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: ls
+    - run: chmod +x replace_vars.sh && ./replace_vars.sh
+    - run: cat app/src/main/java/cn/moon/ql/Config.java
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
