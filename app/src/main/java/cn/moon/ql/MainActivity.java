@@ -99,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
         String pin = null;
         StringBuilder sb = new StringBuilder();
         for (String c : cs) {
-            if(c.contains("pt_key") || c.contains("pt_pin")){
+            if (c.contains("pt_key") || c.contains("pt_pin")) {
                 sb.append(c.trim()).append(";");
             }
-            if(c.contains("pt_pin")){
-                pin = c.replace("pt_pin=","").trim();
+            if (c.contains("pt_pin")) {
+                pin = c.replace("pt_pin=", "").trim();
             }
         }
         if (sb.length() == 0) {
@@ -118,26 +118,39 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     JSONArray list = api.list();
-                    for(int i = 0; i < list.length(); i++){
-                        JSONObject  o = (JSONObject) list.get(i);
+                    int id = 0;
+                    String remarks = null;
+                    for (int i = 0; i < list.length(); i++) {
+                        JSONObject o = (JSONObject) list.get(i);
 
-                        if(o.getString("value").contains(finalPin)){
-                            api.delete(o.getInt("id"));
-                            info("删除" + finalPin +"成功");
+                        if (o.getString("value").contains(finalPin)) {
+//                            api.delete(o.getInt("id"));
+                            id = o.getInt("id");
+                            remarks = o.getString("remarks");
+//                            info("删除" + finalPin + "成功");
                         }
 
                     }
 
                     JSONObject param = new JSONObject();
-                    param.put("remarks", Build.BRAND + " "+ finalPin);
                     param.put("name", JD_COOKIE);
                     param.put("value", sb.toString());
+                    String finalremarks = Build.BRAND + " " + finalPin;
+                    if (remarks != null) {
+                        finalremarks = remarks;
+                    }
+                    param.put("remarks", finalremarks);
 
-
-                    JSONArray arr = new JSONArray();
-                    arr.put(param);
-                    api.add(arr);
-                    info("添加成功");
+                    if (id == 0) {
+                        JSONArray arr = new JSONArray();
+                        arr.put(param);
+                        api.add(arr);
+                        info("添加成功");
+                    } else {
+                        param.put("id", id);
+                        api.update(param);
+                        info("Id：" + id + " " + finalPin + "更新成功");
+                    }
                 } catch (Exception e) {
                     MainActivity.this.err(e);
                 }
@@ -145,8 +158,6 @@ public class MainActivity extends AppCompatActivity {
         }.start();
 
     }
-
-
 
 
 }

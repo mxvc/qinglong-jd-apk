@@ -44,6 +44,10 @@ public class QLApi {
         this.send("/open/envs", "POST", obj.toString());
     }
 
+    public void update(JSONObject obj) throws Exception {
+        this.send("/open/envs", "PUT", obj.toString());
+    }
+
 
     private Object send(String uri, String method, String content) throws Exception {
         RequestBody body = null;
