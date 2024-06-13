@@ -4,20 +4,34 @@
 - 登录后，自动将cookie上传到青龙脚本服务器
 - 源码全部开放
 
+
+
 ## 界面
 ![docs/app.png](docs/app.png)
 
 ![docs/web.png](docs/web.png)
 
 
-# 使用方式
+
+
+# 使用方式一、利用Github Action自动打包apk
 为了安全起见，请fork本项目就修改网址，应用id及密钥
-1. fork 本项目
-2. 修改代码Config.java中的青龙后台地址，CLIENT_ID,CLIENT_SECRET。 (需在青龙脚本配置一个应用)
-3. 等待一段时间就会构建出apk了 ，在右侧Releases菜单下可见
+- fork 本项目 
+- 在青龙后台创建一个应用，赋予修改变量的权限。 
+- 进入您自己的项目，点击Action，启用Github Action功能 配置环境变量，进入Settings->Secret and variables->Actions->New Repository secret， 添加3个配置
+   QL_URL, QL_CLIENT_ID, QL_CLIENT_SECRET。分别表示青龙后台地址，应用ID，应用密钥
+   ![img.png](docs/actions.png)
 
+- 点击Actions菜单，手动触发构建。等待一段时间就会构建出apk了 ，在右侧Releases菜单下可见
 
-# 笔记
+# 使用方式二、自行编译
+1. 克隆 本项目
+2. 修改代码app/src/main/java/cn/moon/ql/Config.java中的青龙后台地址QL_URL, CLIENT_ID,CLIENT_SECRET。 (需在青龙脚本配置一个应用)
+
+# 更新日志
+- 20240613 github action打包apk支持 Secret方式
+
+# 开发笔记
 接口参考文档：https://qinglong.ukenn.top
 
 ## 签名相关
