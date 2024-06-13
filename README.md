@@ -14,7 +14,7 @@
 
 
 
-# 使用方式一、利用Github Action自动打包apk (测试中，请使用方式2)
+# 使用方式一、利用Github Action自动打包apk (已测试成功)
 - fork 本项目 
 - 在青龙后台创建一个应用，赋予修改变量的权限。 依次点击【系统设置】【应用设置】【创建应用】 ，名称无所谓，权限选择 环境变量。 创建后得到Client ID，Client Secret
   ![img.png](docs/ql-app.png)
@@ -32,10 +32,14 @@
 2. 修改代码 app/src/main/java/cn/moon/ql/Config.java  青龙后台地址QL_URL, QL_CLIENT_ID, QL_CLIENT_SECRET。
 
 # 更新日志
-- 20240613 github action打包apk支持 Secret方式
+- 20240613 github action打包apk支持 Secret方式。 
 
-# 开发笔记
+# 开发笔记, 记录开发过程中遇到的问题
 接口参考文档：https://qinglong.ukenn.top
+
+## 使用actions打包遇到问题
+ 由于使用github密码方式，自然想到使用linux 命令 sed 替换密码，没考虑到 url 中含有斜杠， 如http://xxx.com。这个斜杠和sed命令中的斜杠冲突了。修改为#即可。
+ 主要还是因为对linux 的sed命令不熟悉
 
 ## 签名相关
 jks 在docs目录下
