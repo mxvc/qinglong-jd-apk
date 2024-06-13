@@ -50,6 +50,10 @@ public class QLApi {
 
 
     private Object send(String uri, String method, String content) throws Exception {
+        if(QL_URL == null || QL_URL.length() ==0){
+            throw new IllegalStateException("未配置QL_URL");
+        }
+
         RequestBody body = null;
         if (content != null) {
             MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
