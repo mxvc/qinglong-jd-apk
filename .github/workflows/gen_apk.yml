@@ -22,7 +22,7 @@ jobs:
       run: |
         echo ${{secrets.QL_URL}} | wc -L
         echo ${{secrets.QL_URL}} | sed 's/./& /g' 
-        sed -i 's/REPLACE_QL_URL/${{secrets.QL_URL}}/g' app/src/main/java/cn/moon/ql/Config.java
+        sed -i 's/REPLACE_QL_URL/"${{secrets.QL_URL}}"'/g' app/src/main/java/cn/moon/ql/Config.java
         cat app/src/main/java/cn/moon/ql/Config.java
         
 
