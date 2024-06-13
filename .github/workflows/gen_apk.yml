@@ -19,7 +19,7 @@ jobs:
 
     - name: replace vars
       run: |
-        chmod +x gradlew
+        chmod +x replace.sh
         ./replace.sh  $QL_URL $QL_CLIENT_ID $QL_CLIENT_SECRET
         cat app/src/main/java/cn/moon/ql/Config.java
 
