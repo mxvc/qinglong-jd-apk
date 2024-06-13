@@ -21,7 +21,7 @@ jobs:
         QL_CLIENT_SECRET: ${{ secrets.QL_CLIENT_SECRET }}
       run: |
         echo ${{secrets.QL_URL}} | sed 's/./& /g' 
-        echo ${{secrets.QL_URL}} | sed 's/^/s\/REPLACE_QL_URL\//' | sed -i -f - app/src/main/java/cn/moon/ql/Config.java
+        echo ${{secrets.QL_URL}} | sed 's/./& /g' | sed 's/^/s\/REPLACE_QL_URL\//' | sed -i -f - app/src/main/java/cn/moon/ql/Config.java
         echo ${{secrets.QL_CLIENT_ID}} | sed 's/./& /g' | sed -i "s/REPLACE_QL_CLIENT_ID/& /g" app/src/main/java/cn/moon/ql/Config.java
         echo ${{secrets.QL_CLIENT_SECRET}} | sed 's/./& /g' | sed -i "s/REPLACE_QL_CLIENT_SECRET/& /g" app/src/main/java/cn/moon/ql/Config.java
         cat app/src/main/java/cn/moon/ql/Config.java
