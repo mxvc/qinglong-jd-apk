@@ -23,6 +23,9 @@ jobs:
         echo ${{secrets.QL_URL}} | wc -L
         echo ${{secrets.QL_URL}} | sed 's/./& /g' 
         sed -i -e 's#REPLACE_QL_URL#${{secrets.QL_URL}}#g' app/src/main/java/cn/moon/ql/Config.java
+        sed -i -e 's#REPLACE_QL_CLIENT_ID#${{secrets.QL_CLIENT_ID}}#g' app/src/main/java/cn/moon/ql/Config.java
+        sed -i -e 's#REPLACE_QL_CLIENT_SECRET#${{secrets.QL_CLIENT_SECRET}}#g' app/src/main/java/cn/moon/ql/Config.java
+
         cat app/src/main/java/cn/moon/ql/Config.java
         
 
