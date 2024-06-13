@@ -2,10 +2,7 @@ name:  APK 打包
 
 on: [workflow_dispatch,push]
 
-env:
-  QL_URL: "${{ secrets.QL_URL }}"
-  QL_CLIENT_ID: "${{ secrets.QL_CLIENT_ID }}"
-  QL_CLIENT_SECRET: "${{ secrets.QL_CLIENT_SECRET }}"
+
 
 jobs:
   build:
@@ -19,13 +16,12 @@ jobs:
 
     - shell: bash
       env:
-        SUPER_SECRET: ${{ secrets.QL_URL }}
-      run: |
-        echo "$SUPER_SECRET"
-    - name: replace vars
+        QL_URL: "${{ secrets.QL_URL }}"
+        QL_CLIENT_ID: "${{ secrets.QL_CLIENT_ID }}"
+        QL_CLIENT_SECRET: "${{ secrets.QL_CLIENT_SECRET }}"
       run: |
         chmod +x replace.sh
-        ./replace.sh  ${{ secrets.QL_URL }} ${{ secrets.QL_CLIENT_ID }} ${{ secrets.QL_CLIENT_SECRET }}
+        ./replace.sh "$QL_URL" "QL_CLIENT_ID" "QL_CLIENT_SECRET"
         cat app/src/main/java/cn/moon/ql/Config.java
 
     - name: set up JDK 17
