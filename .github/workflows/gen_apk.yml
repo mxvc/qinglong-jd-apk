@@ -28,13 +28,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-
-
     - name: 使用gradlew 打包apk
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-    - run: cd app/build/outputs/apk/release && mv *.apk qinglong-jd-$(date '+%Y%m%d%H%M%S').apk
+      run: |
+        chmod +x gradlew
+        ./gradlew build
+        cd app/build/outputs/apk/release && mv *.apk qinglong-jd-$(date '+%Y%m%d%H%M%S').apk
 
     - name: 签名 apk
       id: sign_app
