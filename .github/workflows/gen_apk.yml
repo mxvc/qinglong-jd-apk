@@ -22,9 +22,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - run: sed -i "s/REPLACE_QL_URL/$QL_URL/g" app/src/main/java/cn/moon/ql/Config.java
-    - run: sed -i "s/REPLACE_QL_CLIENT_ID/$QL_CLIENT_ID/g" app/src/main/java/cn/moon/ql/Config.java
-    - run: sed -i "s/REPLACE_QL_CLIENT_SECRET/$QL_CLIENT_SECRET/g" app/src/main/java/cn/moon/ql/Config.java
+    - run: sed -i "s/REPLACE_QL_URL/${QL_URL}/g" app/src/main/java/cn/moon/ql/Config.java
+    - run: sed -i "s/REPLACE_QL_CLIENT_ID/${QL_CLIENT_ID}/g" app/src/main/java/cn/moon/ql/Config.java
+    - run: sed -i "s/REPLACE_QL_CLIENT_SECRET/${QL_CLIENT_SECRET}/g" app/src/main/java/cn/moon/ql/Config.java
     - run: cat app/src/main/java/cn/moon/ql/Config.java
 
     - name: Grant execute permission for gradlew
