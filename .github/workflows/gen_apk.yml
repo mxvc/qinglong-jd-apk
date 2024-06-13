@@ -17,6 +17,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - shell: bash
+      env:
+        SUPER_SECRET: ${{ secrets.QL_URL }}
+      run: |
+        echo "$SUPER_SECRET"
     - name: replace vars
       run: |
         chmod +x replace.sh
