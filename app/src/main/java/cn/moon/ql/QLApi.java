@@ -1,8 +1,8 @@
 package cn.moon.ql;
 
 import static cn.moon.ql.Config.QL_URL;
-import static cn.moon.ql.Config.CLIENT_ID;
-import static cn.moon.ql.Config.CLIENT_SECRET;
+import static cn.moon.ql.Config.QL_CLIENT_ID;
+import static cn.moon.ql.Config.QL_CLIENT_SECRET;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +21,7 @@ public class QLApi {
 
 
     public void login() throws Exception {
-        JSONObject data = (JSONObject) this.send("/open/auth/token?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET, "GET", null);
+        JSONObject data = (JSONObject) this.send("/open/auth/token?client_id=" + QL_CLIENT_ID + "&client_secret=" + QL_CLIENT_SECRET, "GET", null);
 
         String tokenType = data.getString("token_type");
         String tokenValue = data.getString("token");
@@ -50,7 +50,7 @@ public class QLApi {
 
 
     private Object send(String uri, String method, String content) throws Exception {
-        if(QL_URL == null || QL_URL.length() ==0){
+        if(QL_URL == null || QL_URL.isEmpty()){
             throw new IllegalStateException("未配置QL_URL");
         }
 

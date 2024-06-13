@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+
         webView = findViewById(R.id.webView);
         uploadCookieButton = findViewById(R.id.uploadCookieButton);
 

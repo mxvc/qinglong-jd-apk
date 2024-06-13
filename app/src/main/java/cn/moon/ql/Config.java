@@ -1,13 +1,17 @@
 package cn.moon.ql;
 
+import android.content.Context;
+
 public class Config {
 
+
     // 青龙后台地址，请修改
-    public static final String QL_URL =  System.getenv("QL_URL"); // "http://13.212.144.45:5701";
+    public static final String QL_URL = "REPLACE_QL_URL";
 
     // 接口信息，请修改
-    public static final String CLIENT_ID = System.getenv("QL_CLIENT_ID");  // "0TPSFc-0r8Yj";
-    public static final String CLIENT_SECRET = System.getenv("QL_CLIENT_SECRET"); // "9b4kmwbZQZkd99cmSKW-_QIL";
+    public static String QL_CLIENT_ID = "REPLACE_QL_CLIENT_ID";  // "0TPSFc-0r8Yj";
+    public static String QL_CLIENT_SECRET = "REPLACE_QL_CLIENT_SECRET"; // "9b4kmwbZQZkd99cmSKW-_QIL";
+
 
 
 
