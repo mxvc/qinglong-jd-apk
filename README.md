@@ -22,7 +22,10 @@
    QL_URL, QL_CLIENT_ID, QL_CLIENT_SECRET。分别表示青龙后台地址，应用ID，应用密钥
    ![img.png](docs/actions.png)
 
-- 点击Actions菜单，手动触发构建。等待一段时间就会构建出apk了 ，在右侧Releases菜单下可见
+- 点击Actions菜单，点击左侧 【APK打包】，点击右侧【Run workflow】手动触发打包流程，等待构建流程完毕，约4分钟 。 
+   ![img.png](docs/run.png)
+- 回到项目首页，在右侧Releases菜单下查看最新apk
+   ![img.png](docs/release.png)
 
 # 使用方式二、自行编译
 1. 克隆 本项目
