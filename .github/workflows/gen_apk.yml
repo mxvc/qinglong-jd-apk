@@ -16,9 +16,9 @@ jobs:
 
     - shell: bash
       env:
-        QL_URL: "${{ secrets.QL_URL }}"
-        QL_CLIENT_ID: "${{ secrets.QL_CLIENT_ID }}"
-        QL_CLIENT_SECRET: "${{ secrets.QL_CLIENT_SECRET }}"
+        QL_URL: ${{ secrets.QL_URL }}
+        QL_CLIENT_ID: ${{ secrets.QL_CLIENT_ID }}
+        QL_CLIENT_SECRET: ${{ secrets.QL_CLIENT_SECRET }}
       run: |
         chmod +x replace.sh
         ./replace.sh "$QL_URL" "$QL_CLIENT_ID" "$QL_CLIENT_SECRET"
