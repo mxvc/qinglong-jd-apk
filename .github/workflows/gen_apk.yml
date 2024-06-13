@@ -16,16 +16,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - run: sed -i "s/REPLACE_QL_URL/${{ secrets.QL_URL }}/g" app/src/main/java/cn/moon/ql/Config.java
+    - run: sed -i "s/REPLACE_QL_CLIENT_ID/${QL_CLIENT_ID}/g" app/src/main/java/cn/moon/ql/Config.java
+    - run: sed -i "s/REPLACE_QL_CLIENT_SECRET/${QL_CLIENT_SECRET}/g" app/src/main/java/cn/moon/ql/Config.java
+    - run: cat app/src/main/java/cn/moon/ql/Config.java
+
     - name: set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - run: sed -i "s/REPLACE_QL_URL/${{ secrets.QL_URL }}/g" app/src/main/java/cn/moon/ql/Config.java
-    - run: sed -i "s/REPLACE_QL_CLIENT_ID/${QL_CLIENT_ID}/g" app/src/main/java/cn/moon/ql/Config.java
-    - run: sed -i "s/REPLACE_QL_CLIENT_SECRET/${QL_CLIENT_SECRET}/g" app/src/main/java/cn/moon/ql/Config.java
-    - run: cat app/src/main/java/cn/moon/ql/Config.java
+
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
