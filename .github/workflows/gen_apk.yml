@@ -1,8 +1,6 @@
 name:  APK 打包
 
-on:
-  workflow_dispatch
-  push
+on: [workflow_dispatch,push]
 
 env:
   QL_URL: "${{ secrets.QL_URL }}"
