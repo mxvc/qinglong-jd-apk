@@ -1,6 +1,10 @@
 name:  APK 打包
 
 on: workflow_dispatch
+env:
+  QL_URL: "${{ secrets.QL_URL }}"
+  QL_CLIENT_ID: "${{ secrets.QL_CLIENT_ID }}"
+  QL_CLIENT_SECRET: "${{ secrets.QL_CLIENT_SECRET }}"
 
 jobs:
   build:
@@ -21,9 +25,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - run: ls app/build/outputs/apk/release
     - run: cd app/build/outputs/apk/release && mv *.apk qinglong-jd.apk
-    - run: ls app/build/outputs/apk/release
 
 
     - name: sign apk
