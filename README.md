@@ -14,7 +14,7 @@
 
 
 
-# 使用方式一、利用Github Action自动打包apk
+# 使用方式一、利用Github Action自动打包apk (测试中，请使用方式2)
 - fork 本项目 
 - 在青龙后台创建一个应用，赋予修改变量的权限。 依次点击【系统设置】【应用设置】【创建应用】 ，名称无所谓，权限选择 环境变量。 创建后得到Client ID，Client Secret
   ![img.png](docs/ql-app.png)
