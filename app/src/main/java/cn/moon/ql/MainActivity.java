@@ -2,6 +2,7 @@ package cn.moon.ql;
 
 import static cn.moon.ql.Config.JD_COOKIE;
 import static cn.moon.ql.Config.JD_URL;
+import static cn.moon.ql.Config.QL_URL;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 上传 Cookie
         uploadCookieButton.setOnClickListener(v -> uploadCookie());
+
+        info("青龙服务地址：" + QL_URL);
 
         login();
     }
