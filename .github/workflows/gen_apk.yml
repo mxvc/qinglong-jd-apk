@@ -21,7 +21,7 @@ jobs:
         QL_CLIENT_SECRET: "${{ secrets.QL_CLIENT_SECRET }}"
       run: |
         chmod +x replace.sh
-        ./replace.sh "$QL_URL" "QL_CLIENT_ID" "QL_CLIENT_SECRET"
+        ./replace.sh "$QL_URL" "$QL_CLIENT_ID" "$QL_CLIENT_SECRET"
         cat app/src/main/java/cn/moon/ql/Config.java
 
     - name: set up JDK 17
