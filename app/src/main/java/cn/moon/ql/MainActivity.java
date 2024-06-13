@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     api.login();
-                    MainActivity.this.info("登录成功");
+                    MainActivity.this.info("青龙脚本服务连接成功");
                 } catch (Exception e) {
                     MainActivity.this.err(e);
                 }
