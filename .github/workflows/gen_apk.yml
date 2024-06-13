@@ -26,6 +26,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - run: cd app/build/outputs/apk/release && mv *.apk qinglong-jd.apk
+    - run: echo $QL_URL
+    - run: echo $QL_CLIENT_ID
 
 
     - name: sign apk
