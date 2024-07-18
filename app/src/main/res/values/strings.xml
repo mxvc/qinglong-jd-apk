@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">青龙京东</string>
+    <string name="update_button_name">上传JD Cookie</string>
+    <string name="qinglong_login_name">登录青龙</string>
+    <string name="ql_url_name">青龙URL</string>
+    <string name="ql_ak_name">青龙ClientID</string>
+    <string name="ql_sk_name">青龙ClientSecret</string>
+    <string name="prompt_url">青龙URL</string>
+    <string name="prompt_cid">青龙ClientID</string>
+    <string name="prompt_csk">青龙ClientSecret</string>
+    <string name="action_ql_login">登录</string>
+    <string name="welcome">"🎉欧吼，登录成功啦！"</string>
+    <string name="invalid_url">无效的URL</string>
+    <string name="invalid_cid">无效的ClientID</string>
+    <string name="invalid_csk">无效的ClientSecret</string>
+    <string name="login_failed">"登录失败"</string>
+    <string name="title_activity_qing_long_login">🐉登录青龙</string>
 </resources>
