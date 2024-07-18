@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
 >
 
     <WebView
@@ -11,14 +12,27 @@
 
 
 
-
-
-    <Button
-        android:id="@+id/uploadCookieButton"
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:text="上传Cookie到青龙" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/uploadCookieButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/update_button_name" />
+
+        <Button
+            android:id="@+id/setQingLongButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/qinglong_login_name" />
+    </LinearLayout>
+
+
 
 </RelativeLayout>
