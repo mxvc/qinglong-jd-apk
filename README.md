@@ -29,7 +29,7 @@
 
 # 使用方式二、自行编译
 1. 克隆 本项目
-2. 修改代码 app/src/main/java/cn/moon/ql/Config.java  青龙后台地址QL_URL, QL_CLIENT_ID, QL_CLIENT_SECRET。
+2. 直接打包即可，无需修改代码 app/src/main/java/cn/moon/ql/Config.java 中的青龙配置。
 
 # 更新日志
 - 20240613 github action打包apk支持 Secret方式。 
