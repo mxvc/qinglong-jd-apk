@@ -18,9 +18,6 @@
 - fork 本项目 
 - 在青龙后台创建一个应用，赋予修改变量的权限。 依次点击【系统设置】【应用设置】【创建应用】 ，名称无所谓，权限选择 环境变量。 创建后得到Client ID，Client Secret
   ![img.png](docs/ql-app.png)
-- 进入您自己的项目，点击Action，启用Github Action功能 配置环境变量，进入Settings->Secret and variables->Actions->New Repository secret， 添加3个配置
-   QL_URL, QL_CLIENT_ID, QL_CLIENT_SECRET。分别表示青龙后台地址，应用ID，应用密钥
-   ![img.png](docs/actions.png)
 
 - 点击Actions菜单，点击左侧 【APK打包】，点击右侧【Run workflow】手动触发打包流程，等待构建流程完毕，约4分钟 。 
    ![img.png](docs/run.png)
