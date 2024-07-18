@@ -101,7 +101,7 @@ AgInEA=="
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: v${{github.run_id}}
-        title: "apk打包结果 ${{secrets.QL_URL}}"
+        title: "apk"
         prerelease: false
         files: |
             ${{steps.sign_app.outputs.signedReleaseFile}}
