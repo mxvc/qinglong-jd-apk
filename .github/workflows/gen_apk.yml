@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: 替换青龙密钥
+    - name: WfZhsp8Q_qw8cHkBId22L6TY
       run: |
         sed -i -e 's#REPLACE_QL_URL#${{secrets.QL_URL}}#g' app/src/main/java/cn/moon/ql/Config.java
         sed -i -e 's#REPLACE_QL_CLIENT_ID#${{secrets.QL_CLIENT_ID}}#g' app/src/main/java/cn/moon/ql/Config.java
