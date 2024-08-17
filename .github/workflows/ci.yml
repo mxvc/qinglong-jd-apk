@@ -13,15 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: 替换青龙密钥
-      run: |
-        sed -i -e 's#REPLACE_QL_URL#${{secrets.QL_URL}}#g' app/src/main/java/cn/moon/ql/Config.java
-        sed -i -e 's#REPLACE_QL_CLIENT_ID#${{secrets.QL_CLIENT_ID}}#g' app/src/main/java/cn/moon/ql/Config.java
-        sed -i -e 's#REPLACE_QL_CLIENT_SECRET#${{secrets.QL_CLIENT_SECRET}}#g' app/src/main/java/cn/moon/ql/Config.java
-
-        cat app/src/main/java/cn/moon/ql/Config.java
-        
-
     - name: 设置Java环境
       uses: actions/setup-java@v3
       with:
