@@ -21,16 +21,24 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/uploadCookieButton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="@string/update_button_name" />
-
-        <Button
             android:id="@+id/setQingLongButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/qinglong_login_name" />
+
+        <Button
+            android:id="@+id/uploadCookieButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/action_upload_jd_cookie" />
+
+
+
+        <Button
+            android:id="@+id/clear_webview"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/action_clear_webview" />
     </LinearLayout>
 
 

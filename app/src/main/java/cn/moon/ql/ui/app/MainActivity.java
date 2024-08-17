@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.webkit.CookieManager;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webView);
         uploadCookieButton = findViewById(R.id.uploadCookieButton);
         loginQingLongButton = findViewById(R.id.setQingLongButton);
+        Button clearWebviewBtn = findViewById(R.id.clear_webview);
 
         // 设置 WebView 的基本属性
         webView.setWebChromeClient(new WebChromeClient());
@@ -64,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl(JD_URL);
 
 
-        // 上传 Cookie
+
         uploadCookieButton.setOnClickListener(v -> uploadCookie());
         loginQingLongButton.setOnClickListener(v -> showQingLongLogin());
+        clearWebviewBtn.setOnClickListener(v->clearWebview());
+
     }
 
 
@@ -171,6 +175,18 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             MainActivity.this.err(String.format("☹️更新JDCookie【%s】失败", jdCookie.getPtPin()));
         }
+    }
+
+    private void clearWebview(){
+        CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
+            @Override
+            public void onReceiveValue(Boolean aBoolean) {
+                // Cookie清除完成后的操作
+            }
+        });
+        CookieManager.getInstance().flush();
+
+        webView.loadUrl(JD_URL);
     }
 
 }

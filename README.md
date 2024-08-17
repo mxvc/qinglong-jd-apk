@@ -23,8 +23,8 @@
 2. 直接打包即可
 
 # 更新日志
-- 20240613 github action打包apk支持 Secret方式。 
-
+- 202406 github action打包apk支持 Secret方式。 
+- 202408 增加清除本地cookie的功能，方便操作多个京东账号
 # 开发笔记, 记录开发过程中遇到的问题
 接口参考文档：https://qinglong.ukenn.top
 
