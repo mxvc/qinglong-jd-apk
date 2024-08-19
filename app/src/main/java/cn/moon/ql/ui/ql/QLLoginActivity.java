@@ -52,7 +52,6 @@ public class QLLoginActivity extends AppCompatActivity {
             if (qlLoginFormState == null) {
                 return;
             }
-            loginButton.setEnabled(qlLoginFormState.isDataValid());
             if (qlLoginFormState.getUrlError() != null) {
                 urlEditText.setError(getString(qlLoginFormState.getUrlError()));
             }
@@ -78,30 +77,10 @@ public class QLLoginActivity extends AppCompatActivity {
             }
             setResult(Activity.RESULT_OK);
 
-            //Complete and destroy login activity once successful
+            // Complete and destroy login activity once successful
 //            finish();
         });
 
-//        TextWatcher afterTextChangedListener = new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // ignore
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                // ignore
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        };
-//        urlEditText.addTextChangedListener(afterTextChangedListener);
-//        cliendIDEditText.addTextChangedListener(afterTextChangedListener);
-//        cliendSecretEditText.addTextChangedListener(afterTextChangedListener);
         cliendSecretEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.settingsFormChanged(urlEditText.getText().toString(),
