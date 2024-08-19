@@ -31,13 +31,6 @@ android {
     productFlavors {
         ci {
             dimension 'default'
-
-            final String gitBranch = providers.exec {commandLine('git', 'rev-parse', '--abbrev-ref', 'HEAD')}.standardOutput.asText.get().trim()
-            final String buildTime = new Date().format('yyMMdd-HHmm')
-            final String buildId = gitBranch + '_'  + buildTime
-
-            applicationIdSuffix '.ci'
-            versionNameSuffix '-' + buildId + ' CI'
             signingConfig signingConfigs.ci
         }
     }
