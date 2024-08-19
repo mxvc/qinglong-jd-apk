@@ -1,6 +1,10 @@
 name:  APK 打包
 
-on: [workflow_dispatch,push]
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
 
 
 
