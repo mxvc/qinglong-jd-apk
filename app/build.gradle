@@ -17,7 +17,7 @@ android {
     }
     signingConfigs {
         ci {
-            final String keystorePropertiesFile = rootProject.file('keystore.properties')
+            final String keystorePropertiesFile = rootProject.file('app/ci-keystore.properties')
             final Properties keystoreProperties = new Properties()
             keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
