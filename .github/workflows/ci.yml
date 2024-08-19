@@ -32,4 +32,4 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          app/build/outputs/apk/ci/**/*.apk
+          app/build/outputs/apk/ci/**/*.*
