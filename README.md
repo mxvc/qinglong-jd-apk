@@ -28,20 +28,10 @@
 # 开发笔记, 记录开发过程中遇到的问题
 接口参考文档：https://qinglong.ukenn.top
 
-## 使用actions打包遇到问题
- 由于使用github密码方式，自然想到使用linux 命令 sed 替换密码，没考虑到 url 中含有斜杠， 如http://xxx.com。这个斜杠和sed命令中的斜杠冲突了。修改为#即可。
- 主要还是因为对linux 的sed命令不熟悉
 
-## 签名相关
-jks 在docs目录下
-密码： 123123
-alias(别名): key0 
 
-## github actions
-需要生成base64时， 使用 gitbash 打开jks文件所在目录（docs）， 执行
-```
-openssl base64 < qinglong-client.jks | tr -d '\n' | tee some_signing_key.jks.base64.txt
-```
+
+
 
 
 

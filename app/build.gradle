@@ -15,7 +15,33 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        ci {
+            final String keystorePropertiesFile = rootProject.file('keystore.properties')
+            final Properties keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
+    flavorDimensions = ['default']
+    productFlavors {
+        ci {
+            dimension 'default'
+
+            final String gitBranch = providers.exec {commandLine('git', 'rev-parse', '--abbrev-ref', 'HEAD')}.standardOutput.asText.get().trim()
+            final String buildTime = new Date().format('yyMMdd-HHmm')
+            final String buildId = gitBranch + '_'  + buildTime
+
+            applicationIdSuffix '.ci'
+            versionNameSuffix '-' + buildId + ' CI'
+            signingConfig signingConfigs.ci
+            archivesBaseName = 'qljd_' + buildId
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
