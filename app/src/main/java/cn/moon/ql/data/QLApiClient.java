@@ -64,6 +64,10 @@ public class QLApiClient {
         this.doRequest(settingsData.getUrl(), "/open/envs", "PUT", envData.toJsonString(), loginData.toAuthValue());
     }
 
+    public void enableEnv(Integer id, QLSettingsData settingsData, QLLoginData loginData) throws Exception {
+        this.doRequest(settingsData.getUrl(), "/open/envs/enable", "PUT", "[" + id + "]", loginData.toAuthValue());
+    }
+
     private Object doRequest(String url, String uri, String method, String content, String authStr) throws Exception {
         RequestBody body = null;
         if (content != null) {
