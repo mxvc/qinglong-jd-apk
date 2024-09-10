@@ -170,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 updateEnv.setId(id);
                 qlApiClient.updateEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
+                //启用token
+                qlApiClient.enableEnv(id, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
                 info(String.format("🎉更新JDCookie【%s】成功", jdCookie.getPtPin()));
             }
         } catch (Exception e) {
