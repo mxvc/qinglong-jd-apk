@@ -14,7 +14,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import cn.moon.ql.QLApplication;
+import cn.moon.ql.App;
 import cn.moon.ql.R;
 import cn.moon.ql.data.model.QLSettingsData;
 import cn.moon.ql.data.model.QLStoreData;
@@ -95,7 +95,7 @@ public class QLLoginActivity extends AppCompatActivity {
     }
 
     private void displayLocalData(EditText urlEditText, EditText cliendIDEditText, EditText cliendSecretEditText) {
-        QLStoreData qlStoreData = QLApplication.getQLStoreData();
+        QLStoreData qlStoreData = App.getQLStoreData();
         QLSettingsData settingsData = qlStoreData.getSettingsData();
         if (settingsData != null) {
             urlEditText.setText(settingsData.getUrl());

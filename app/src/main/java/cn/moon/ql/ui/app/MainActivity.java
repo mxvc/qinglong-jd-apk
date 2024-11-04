@@ -10,7 +10,6 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 import java.util.Map;
 
-import cn.moon.ql.QLApplication;
+import cn.moon.ql.App;
 import cn.moon.ql.R;
 import cn.moon.ql.SiteConfig;
 import cn.moon.ql.data.QLApiClient;
@@ -32,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private WebView webView;
-    private Button uploadCookieButton;
-    private Button loginQingLongButton;
 
     Handler handler = new Handler() {
         @Override
@@ -64,33 +61,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-
-        webView = findViewById(R.id.webView);
-        uploadCookieButton = findViewById(R.id.uploadCookieButton);
-        loginQingLongButton = findViewById(R.id.setQingLongButton);
-        Button clearWebviewBtn = findViewById(R.id.clear_webview);
+        // 设置点击事件
+        findViewById(R.id.uploadCookieButton).setOnClickListener(v -> uploadCookie());
+        findViewById(R.id.setQingLongButton).setOnClickListener(v -> showQingLongLogin());
+        findViewById(R.id.clear_webview).setOnClickListener(v -> clearWebview());
 
         // 设置 WebView 的基本属性
+        webView = findViewById(R.id.webView);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(SiteConfig.JD.getUrl());
-
-
-        uploadCookieButton.setOnClickListener(v -> uploadCookie());
-        loginQingLongButton.setOnClickListener(v -> showQingLongLogin());
-        clearWebviewBtn.setOnClickListener(v -> clearWebview());
-
     }
 
 
-
-
     private void uploadCookie() {
-        if (!QLApplication.getQLStoreData().isLoggedQL()) {
+        if (!App.getQLStoreData().isLoggedQL()) {
             err("未配置密钥");
             return;
         }
@@ -120,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, String> getJDCookie() {
         String cookies = CookieManager.getInstance().getCookie(webView.getUrl());
 
-        Map<String, String> map = CookieUtil.parse(cookies,"pt_pin","pt_key");
+        Map<String, String> map = CookieUtil.parse(cookies, "pt_pin", "pt_key");
 
 
         return map;
@@ -130,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, String> map = CookieUtil.parse(envValue);
         String ptPin = map.get("ptPin");
         try {
-            QLStoreData qlStoreData = QLApplication.getQLStoreData();
+            QLStoreData qlStoreData = App.getQLStoreData();
             String env = getEnv();
             List<QLEnvData> envDataList = qlApiClient.listEnv(env, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
             Integer id = null;
@@ -167,8 +155,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         CookieManager.getInstance().flush();
-
-
         webView.loadUrl(SiteConfig.JD.getUrl());
     }
 

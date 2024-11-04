@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">青龙京东</string>
     <string name="action_upload">上传到青龙</string>
-    <string name="qinglong_login_name">配置青龙</string>
+    <string name="qinglong_setting">配置青龙</string>
     <string name="ql_ak_name">青龙ClientID</string>
     <string name="ql_sk_name">青龙ClientSecret</string>
     <string name="prompt_url">青龙地址,形如 http://127.0.0.1:5700</string>
@@ -16,5 +16,5 @@
     <string name="title_activity_qing_long_login">🐉登录青龙</string>
 
 
-    <string name="action_clear_webview">清除本地Cookie</string>
+    <string name="action_clear_webview">刷新</string>
 </resources>

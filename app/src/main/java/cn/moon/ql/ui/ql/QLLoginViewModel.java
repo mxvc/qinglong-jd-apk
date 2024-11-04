@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import cn.moon.ql.QLApplication;
+import cn.moon.ql.App;
 import cn.moon.ql.R;
 import cn.moon.ql.data.QLLoginRepository;
 import cn.moon.ql.data.Result;
@@ -39,7 +39,7 @@ public class QLLoginViewModel extends ViewModel {
         if (result instanceof Result.Success) {
             QLLoginData loginData = ((Result.Success<QLLoginData>) result).getData();
             loginResult.setValue(new QLLoginResult(new QLLoginView(loginData.getToken())));
-            QLApplication.storeQLDate(settingsData,loginData);
+            App.storeQLDate(settingsData,loginData);
         } else {
             loginResult.setValue(new QLLoginResult(R.string.login_failed));
         }
