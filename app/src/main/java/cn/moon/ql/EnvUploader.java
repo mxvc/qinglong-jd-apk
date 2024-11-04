@@ -53,7 +53,5 @@ public class EnvUploader {
         //启用token
         sdk.enableEnv(id, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
         return "更新成功";
-
-
     }
 }
