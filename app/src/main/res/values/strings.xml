@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">青龙京东</string>
     <string name="action_upload">上传</string>
-    <string name="qinglong_setting">登录</string>
+    <string name="qinglong_setting">登录青龙</string>
     <string name="ql_ak_name">青龙ClientID</string>
     <string name="ql_sk_name">青龙ClientSecret</string>
     <string name="prompt_url">地址,如 http://127.0.0.1:5700</string>
