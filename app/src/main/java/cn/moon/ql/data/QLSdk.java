@@ -1,7 +1,5 @@
 package cn.moon.ql.data;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -19,13 +17,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class QLApiClient {
+public class QLSdk {
     private OkHttpClient client = new OkHttpClient();
 
-    public QLLoginData login(QLSettingsData settings) throws Exception {
-        JSONObject data = (JSONObject) this.doRequest(settings.getUrl(), "/open/auth/token?client_id=" + settings.getCid() + "&client_secret=" + settings.getCsk(), "GET", null, null);
+    public QLLoginData login(String url, String cid, String csk) throws Exception {
+        JSONObject data = (JSONObject) this.doRequest(url, "/open/auth/token?client_id=" + cid + "&client_secret=" + csk, "GET", null, null);
 
-        Log.d(QLApiClient.class.getName(), "login: " + data.toString());
         String tokenType = data.getString("token_type");
         String tokenValue = data.getString("token");
 
@@ -84,31 +81,26 @@ public class QLApiClient {
                 .method(method, body)
                 .build();
 
-        try {
-            Response response = client.newCall(request).execute();
+        Response response = client.newCall(request).execute();
 
-            String rsBody = response.body().string();
-            JSONObject rs = new JSONObject(rsBody);
+        String rsBody = response.body().string();
+        JSONObject rs = new JSONObject(rsBody);
 
-            if (!response.isSuccessful()) {
+        if (!response.isSuccessful()) {
 
-                throw new IllegalStateException(uri + " " + rs.getString("message"));
-            }
-
-
-            System.out.println(rs);
-            if (rs.getInt("code") != 200) {
-                String message = rs.getString("message");
-                throw new IllegalStateException(message);
-            }
-            if (rs.has("data")) {
-                return rs.get("data");
-            }
-            return null;
-        } catch (Exception e) {
-            Log.e(this.getClass().getName(), e.getMessage());
-            return null;
+            throw new IllegalStateException(uri + " " + rs.getString("message"));
         }
+
+
+        if (rs.getInt("code") != 200) {
+            String message = rs.getString("message");
+            throw new IllegalStateException(message);
+        }
+        if (rs.has("data")) {
+            return rs.get("data");
+        }
+        return null;
+
 
     }
 }

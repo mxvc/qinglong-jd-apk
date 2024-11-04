@@ -32,10 +32,6 @@ public class App extends Application {
 
     private void initApp() {
         sharedPreferences = getSharedPreferences(QL_DATA_FILE_NAME, MODE_PRIVATE);
-        loadQLLoginDate();
-    }
-
-    private void loadQLLoginDate() {
         String url = sharedPreferences.getString("url", "");
         String cid = sharedPreferences.getString("cid", "");
         String csk = sharedPreferences.getString("csk", "");
@@ -48,7 +44,9 @@ public class App extends Application {
         qlStoreData = new QLStoreData(loginData, settingsData);
     }
 
-    public static void storeQLDate(QLSettingsData settingsData, QLLoginData loginData) {
+
+
+    public static void storeQLData(QLSettingsData settingsData, QLLoginData loginData) {
         qlStoreData = new QLStoreData(loginData, settingsData);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("url", settingsData.getUrl());

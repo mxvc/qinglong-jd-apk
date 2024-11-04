@@ -21,7 +21,7 @@ import java.util.Map;
 import cn.moon.ql.App;
 import cn.moon.ql.R;
 import cn.moon.ql.SiteConfig;
-import cn.moon.ql.data.QLApiClient;
+import cn.moon.ql.data.QLSdk;
 import cn.moon.ql.data.model.QLEnvData;
 import cn.moon.ql.data.model.QLStoreData;
 import cn.moon.ql.ui.ql.QLLoginActivity;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         handler.sendMessage(handler.obtainMessage(-1, msg));
     }
 
-    private QLApiClient qlApiClient = new QLApiClient();
+    private QLSdk qlSdk = new QLSdk();
 
 
     private String getEnv() {
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             QLStoreData qlStoreData = App.getQLStoreData();
             String env = getEnv();
-            List<QLEnvData> envDataList = qlApiClient.listEnv(env, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
+            List<QLEnvData> envDataList = qlSdk.listEnv(env, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
             Integer id = null;
             for (QLEnvData envData : envDataList) {
                 String name = envData.getName();
@@ -132,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
 
             QLEnvData updateEnv = new QLEnvData(env, envValue, null);
             if (id == null) {
-                qlApiClient.addEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
+                qlSdk.addEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
                 info(String.format("🎉添加JDCookie【%s】成功", ptPin));
             } else {
                 updateEnv.setId(id);
-                qlApiClient.updateEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
+                qlSdk.updateEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
                 //启用token
-                qlApiClient.enableEnv(id, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
+                qlSdk.enableEnv(id, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
                 info(String.format("🎉更新JDCookie【%s】成功", ptPin));
             }
         } catch (Exception e) {
