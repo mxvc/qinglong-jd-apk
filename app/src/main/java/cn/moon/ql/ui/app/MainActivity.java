@@ -2,7 +2,6 @@ package cn.moon.ql.ui.app;
 
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,15 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.moon.ql.QLApplication;
 import cn.moon.ql.R;
 import cn.moon.ql.SiteConfig;
 import cn.moon.ql.data.QLApiClient;
-import cn.moon.ql.data.model.JDCookie;
 import cn.moon.ql.data.model.QLEnvData;
 import cn.moon.ql.data.model.QLStoreData;
 import cn.moon.ql.ui.ql.QLLoginActivity;
+import cn.moon.ql.util.CookieUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void info(String msg) {
+        handler.sendMessage(handler.obtainMessage(1, msg));
+    }
+
+    private void err(String msg) {
+        handler.sendMessage(handler.obtainMessage(-1, msg));
+    }
+
     private QLApiClient qlApiClient = new QLApiClient();
 
 
@@ -78,37 +87,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void info(String msg) {
-        handler.sendMessage(handler.obtainMessage(1, msg));
-    }
 
-    private void err(String msg) {
-        handler.sendMessage(handler.obtainMessage(-1, msg));
-    }
-
-    private void err(Exception e) {
-        String msg = e.getMessage();
-        if (msg == null) {
-            msg = e.getClass().getSimpleName();
-        }
-        handler.sendMessage(handler.obtainMessage(-1, msg));
-    }
 
     private void uploadCookie() {
         if (!QLApplication.getQLStoreData().isLoggedQL()) {
-            err("☹️请先登录青龙服务器");
+            err("未配置密钥");
             return;
         }
-        JDCookie jdCookie = getJDCookie();
-        if (jdCookie == null) {
-            err("☹️请先登录JD账号");
+        Map<String, String> jdCookie = getJDCookie();
+        if (jdCookie.isEmpty()) {
+            err("未登录京东");
             return;
         }
+
+        String envValue = CookieUtil.join(jdCookie);
 
         new Thread() {
             @Override
             public void run() {
-                doUploadJDCookie(jdCookie);
+                doUploadEnv(envValue);
             }
         }.start();
 
@@ -116,71 +113,48 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showQingLongLogin() {
-        // 创建一个意图，指定要跳转到的活动
         Intent intent = new Intent(MainActivity.this, QLLoginActivity.class);
-
-        // 启动活动
         startActivity(intent);
     }
 
-    private JDCookie getJDCookie() {
+    private Map<String, String> getJDCookie() {
         String cookies = CookieManager.getInstance().getCookie(webView.getUrl());
-        String[] cookiesArr = cookies.split(";");
 
-        String ptPin = null;
-        String ptKey = null;
-        for (String ck : cookiesArr) {
-            if (ck.contains("pt_pin")) {
-                ptPin = ck.replace("pt_pin=", "").trim();
-            }
+        Map<String, String> map = CookieUtil.parse(cookies,"pt_pin","pt_key");
 
-            if (ck.contains("pt_key")) {
-                ptKey = ck.replace("pt_key=", "").trim();
-            }
-        }
 
-        if (ptPin != null && ptKey != null) {
-            return new JDCookie(ptPin, ptKey);
-        }
-
-        return null;
+        return map;
     }
 
-    private void doUploadJDCookie(JDCookie jdCookie) {
+    private void doUploadEnv(String envValue) {
+        Map<String, String> map = CookieUtil.parse(envValue);
+        String ptPin = map.get("ptPin");
         try {
             QLStoreData qlStoreData = QLApplication.getQLStoreData();
             String env = getEnv();
             List<QLEnvData> envDataList = qlApiClient.listEnv(env, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
             Integer id = null;
-            String remarks = null;
             for (QLEnvData envData : envDataList) {
                 String name = envData.getName();
                 String value = envData.getValue();
-                if (env.equals(name) && value.contains(jdCookie.getPtPin())) {
+                if (env.equals(name) && value.contains(ptPin)) {
                     id = envData.getId();
-                    remarks = envData.getRemarks();
                 }
             }
 
-            String finalremarks = Build.BRAND + " " + jdCookie.getPtPin();
-            if (remarks != null) {
-                finalremarks = remarks;
-            }
-
-
-            QLEnvData updateEnv = new QLEnvData(env, jdCookie.joinPinAndKey(), finalremarks);
+            QLEnvData updateEnv = new QLEnvData(env, envValue, null);
             if (id == null) {
                 qlApiClient.addEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
-                info(String.format("🎉添加JDCookie【%s】成功", jdCookie.getPtPin()));
+                info(String.format("🎉添加JDCookie【%s】成功", ptPin));
             } else {
                 updateEnv.setId(id);
                 qlApiClient.updateEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
                 //启用token
                 qlApiClient.enableEnv(id, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
-                info(String.format("🎉更新JDCookie【%s】成功", jdCookie.getPtPin()));
+                info(String.format("🎉更新JDCookie【%s】成功", ptPin));
             }
         } catch (Exception e) {
-            MainActivity.this.err(String.format("☹️更新JDCookie【%s】失败", jdCookie.getPtPin()));
+            MainActivity.this.err(String.format("更新JDCookie【%s】失败", ptPin));
         }
     }
 
@@ -188,10 +162,12 @@ public class MainActivity extends AppCompatActivity {
         CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
             @Override
             public void onReceiveValue(Boolean aBoolean) {
+                info("清除cookie成功");
                 // Cookie清除完成后的操作
             }
         });
         CookieManager.getInstance().flush();
+
 
         webView.loadUrl(SiteConfig.JD.getUrl());
     }

@@ -21,4 +21,5 @@ public class SiteConfig {
     public String getEnv() {
         return env;
     }
+
 }
