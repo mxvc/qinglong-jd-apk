@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 import cn.moon.ql.App;
+import cn.moon.ql.EnvUploader;
 import cn.moon.ql.R;
-import cn.moon.ql.SiteConfig;
-import cn.moon.ql.data.QLSdk;
+import cn.moon.ql.SiteType;
 import cn.moon.ql.data.model.QLEnvData;
 import cn.moon.ql.data.model.QLStoreData;
 import cn.moon.ql.databinding.ActivityMainBinding;
@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
         handler.sendMessage(handler.obtainMessage(-1, msg));
     }
 
-    private QLSdk sdk = new QLSdk();
 
-    private SiteConfig siteConfig = SiteConfig.JD;
+    private SiteType siteType = SiteType.JD;
 
+    private EnvUploader uploader = new EnvUploader();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         bd.uploadCookieButton.setOnClickListener(v -> uploadCookie());
         bd.setQingLongButton.setOnClickListener(v -> showQingLongLogin());
         bd.clearWebview.setOnClickListener(v -> clearWebview());
-        bd.qlEnvName.setText(siteConfig.getEnv());
+        bd.qlEnvName.setText(siteType.getEnv());
 
 
         // 设置 WebView 的基本属性
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(siteConfig.getUrl());
+        webView.loadUrl(siteType.getUrl());
     }
 
 
@@ -83,18 +83,18 @@ public class MainActivity extends AppCompatActivity {
             err("未配置密钥");
             return;
         }
-        Map<String, String> jdCookie = getJDCookie();
-        if (jdCookie.isEmpty()) {
-            err("未登录京东");
-            return;
-        }
+        String cookies = CookieManager.getInstance().getCookie(webView.getUrl());
 
-        String envValue = CookieUtil.join(jdCookie);
 
         new Thread() {
             @Override
             public void run() {
-                doUploadEnv(envValue);
+                try {
+                  String msg=  uploader.upload(siteType, bd.qlEnvName.getText().toString(), cookies);
+                  info(msg);
+                } catch (Exception e) {
+                    err(e.getMessage());
+                }
             }
         }.start();
 
@@ -106,44 +106,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private Map<String, String> getJDCookie() {
-        String cookies = CookieManager.getInstance().getCookie(webView.getUrl());
-        Map<String, String> map = CookieUtil.parse(cookies, "pt_pin", "pt_key");
-        return map;
-    }
-
-    private void doUploadEnv(String envValue) {
-        String envName = bd.qlEnvName.getText().toString();
-        Map<String, String> map = CookieUtil.parse(envValue);
-        String ptPin = map.get("ptPin");
-        try {
-            QLStoreData qlStoreData = App.getQLStoreData();
-
-            List<QLEnvData> envDataList = sdk.listEnv(envName, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
-            Integer id = null;
-            for (QLEnvData envData : envDataList) {
-                String name = envData.getName();
-                String value = envData.getValue();
-                if (envName.equals(name) && value.contains(ptPin)) {
-                    id = envData.getId();
-                }
-            }
-
-            QLEnvData updateEnv = new QLEnvData(envName, envValue, null);
-            if (id == null) {
-                sdk.addEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
-                info(String.format("🎉添加JDCookie【%s】成功", ptPin));
-            } else {
-                updateEnv.setId(id);
-                sdk.updateEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
-                //启用token
-                sdk.enableEnv(id, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
-                info(String.format("🎉更新JDCookie【%s】成功", ptPin));
-            }
-        } catch (Exception e) {
-            MainActivity.this.err(String.format("更新JDCookie【%s】失败", ptPin));
-        }
-    }
 
     private void clearWebview() {
         CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
@@ -154,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         CookieManager.getInstance().flush();
-        webView.loadUrl(siteConfig.getUrl());
+        webView.loadUrl(siteType.getUrl());
     }
 
 }

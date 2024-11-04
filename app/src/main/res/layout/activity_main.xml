@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:hint="变量名"
             android:inputType="text"
-            android:selectAllOnFocus="true" />
+            />
 
         <Button
             android:id="@+id/uploadCookieButton"

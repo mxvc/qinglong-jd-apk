@@ -22,7 +22,7 @@ public class CookieUtil {
                 String v = arr[1];
 
                 if(!TextUtils.isEmpty(v)){
-                    map.put(k, v);
+                    map.put(k.trim(), v.trim());
                 }
 
 

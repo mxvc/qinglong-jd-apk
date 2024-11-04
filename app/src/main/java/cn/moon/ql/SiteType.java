@@ -1,16 +1,15 @@
 package cn.moon.ql;
 
-public class SiteConfig {
+public enum SiteType {
+    JD("https://m.jd.com","JD_COOKIE");
 
     private String url;
     private String env; // 青龙环境变量
 
-    // 京东
-    public static final SiteConfig JD = new SiteConfig();
 
-    static {
-        JD.url = "https://m.jd.com";
-        JD.env = "JD_COOKIE";
+    SiteType(String url, String env){
+        this.url = url;
+        this.env = env;
     }
 
 
