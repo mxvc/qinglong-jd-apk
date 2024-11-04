@@ -1,8 +1,8 @@
 package cn.moon.ql.ui.ql;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
 
 import cn.moon.ql.data.QLApiClient;
 import cn.moon.ql.data.QLLoginDataSource;

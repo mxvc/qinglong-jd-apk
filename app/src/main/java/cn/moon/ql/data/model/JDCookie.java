@@ -1,7 +1,7 @@
 package cn.moon.ql.data.model;
 
 public class JDCookie {
-    public static final String JD_COOKIE = "JD_COOKIE";
+
     private String ptPin;
     private String ptKey;
     private String remarks;

@@ -1,15 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
+    android:orientation="vertical">
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="400dp" />
 
 
     <LinearLayout
@@ -17,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <Button
@@ -30,8 +27,7 @@
             android:id="@+id/uploadCookieButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/action_upload_jd_cookie" />
-
+            android:text="@string/action_upload" />
 
 
         <Button
@@ -42,5 +38,4 @@
     </LinearLayout>
 
 
-
-</RelativeLayout>
+</LinearLayout>

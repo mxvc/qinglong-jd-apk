@@ -2,10 +2,6 @@ package cn.moon.ql;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
-import android.os.Build;
-
-import androidx.annotation.NonNull;
 
 
 public class App  extends Application {

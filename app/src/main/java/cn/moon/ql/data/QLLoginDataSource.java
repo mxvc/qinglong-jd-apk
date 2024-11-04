@@ -1,13 +1,12 @@
 package cn.moon.ql.data;
 
-import cn.moon.ql.data.model.QLLoginData;
-import cn.moon.ql.data.model.QLSettingsData;
-
 import java.io.IOException;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import cn.moon.ql.data.model.QLLoginData;
+import cn.moon.ql.data.model.QLSettingsData;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

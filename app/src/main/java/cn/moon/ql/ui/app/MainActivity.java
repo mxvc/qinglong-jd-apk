@@ -1,5 +1,6 @@
 package cn.moon.ql.ui.app;
 
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,21 +14,19 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+
 import cn.moon.ql.QLApplication;
 import cn.moon.ql.R;
+import cn.moon.ql.SiteConfig;
 import cn.moon.ql.data.QLApiClient;
 import cn.moon.ql.data.model.JDCookie;
 import cn.moon.ql.data.model.QLEnvData;
-import cn.moon.ql.data.model.QLLoginData;
 import cn.moon.ql.data.model.QLStoreData;
 import cn.moon.ql.ui.ql.QLLoginActivity;
-
-import static cn.moon.ql.Config.JD_URL;
-import static cn.moon.ql.data.model.JDCookie.JD_COOKIE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
     };
     private QLApiClient qlApiClient = new QLApiClient();
 
+
+    private String getEnv() {
+        return SiteConfig.JD.getEnv();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(JD_URL);
-
+        webView.loadUrl(SiteConfig.JD.getUrl());
 
 
         uploadCookieButton.setOnClickListener(v -> uploadCookie());
         loginQingLongButton.setOnClickListener(v -> showQingLongLogin());
-        clearWebviewBtn.setOnClickListener(v->clearWebview());
+        clearWebviewBtn.setOnClickListener(v -> clearWebview());
 
     }
 
@@ -145,13 +149,14 @@ public class MainActivity extends AppCompatActivity {
     private void doUploadJDCookie(JDCookie jdCookie) {
         try {
             QLStoreData qlStoreData = QLApplication.getQLStoreData();
-            List<QLEnvData> envDataList = qlApiClient.listEnv(JD_COOKIE, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
+            String env = getEnv();
+            List<QLEnvData> envDataList = qlApiClient.listEnv(env, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
             Integer id = null;
             String remarks = null;
             for (QLEnvData envData : envDataList) {
                 String name = envData.getName();
                 String value = envData.getValue();
-                if (JD_COOKIE.equals(name) && value.contains(jdCookie.getPtPin())) {
+                if (env.equals(name) && value.contains(jdCookie.getPtPin())) {
                     id = envData.getId();
                     remarks = envData.getRemarks();
                 }
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            QLEnvData updateEnv = new QLEnvData(JD_COOKIE, jdCookie.joinPinAndKey(), finalremarks);
+            QLEnvData updateEnv = new QLEnvData(env, jdCookie.joinPinAndKey(), finalremarks);
             if (id == null) {
                 qlApiClient.addEnv(updateEnv, qlStoreData.getSettingsData(), qlStoreData.getLoginData());
                 info(String.format("🎉添加JDCookie【%s】成功", jdCookie.getPtPin()));
@@ -179,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void clearWebview(){
+    private void clearWebview() {
         CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
             @Override
             public void onReceiveValue(Boolean aBoolean) {
@@ -188,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         });
         CookieManager.getInstance().flush();
 
-        webView.loadUrl(JD_URL);
+        webView.loadUrl(SiteConfig.JD.getUrl());
     }
 
 }

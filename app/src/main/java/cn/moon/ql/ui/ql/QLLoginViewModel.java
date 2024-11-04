@@ -1,16 +1,16 @@
 package cn.moon.ql.ui.ql;
 
+import android.util.Patterns;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.util.Patterns;
-
 import cn.moon.ql.QLApplication;
+import cn.moon.ql.R;
 import cn.moon.ql.data.QLLoginRepository;
 import cn.moon.ql.data.Result;
 import cn.moon.ql.data.model.QLLoginData;
-import cn.moon.ql.R;
 import cn.moon.ql.data.model.QLSettingsData;
 
 public class QLLoginViewModel extends ViewModel {
