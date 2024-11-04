@@ -18,7 +18,7 @@ public class QLLoginActivity extends AppCompatActivity implements View.OnClickLi
 
     private ActivityQingLongLoginBinding binding;
 
-    private QLSdk client = new QLSdk();
+    private QLSdk sdk = new QLSdk();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class QLLoginActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 try {
-                    QLLoginData login = client.login(url, cid, csk);
+                    QLLoginData login = sdk.login(url, cid, csk);
 
 
                     runOnUiThread(() -> {

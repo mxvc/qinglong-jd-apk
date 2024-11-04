@@ -19,26 +19,36 @@
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="400dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/setQingLongButton"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/qinglong_setting" />
 
+        <EditText
+            android:id="@+id/ql_env_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="变量名"
+            android:inputType="text"
+            android:selectAllOnFocus="true" />
+
         <Button
             android:id="@+id/uploadCookieButton"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/action_upload" />
 
 
