@@ -21,7 +21,7 @@ public class EnvUploader {
     }
 
     public String uploadJd(String envName, String cookies) throws Exception {
-        Map<String, String> jdCookie = CookieUtil.parse(cookies, "pt_pin", "pt_key");
+        Map<String, String> jdCookie = CookieUtil.parse(cookies,  "pt_key", "pt_pin");
         if (jdCookie.isEmpty()) {
             throw new Exception("未登录京东");
         }
