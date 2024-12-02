@@ -53,7 +53,7 @@ public class CookieUtil {
 
             list.add(key+"="+value);
         }
-        return TextUtils.join("; ", list);
+        return TextUtils.join("; ", list) + ";";
     }
 
 
