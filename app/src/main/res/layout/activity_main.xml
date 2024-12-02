@@ -40,7 +40,7 @@
             android:id="@+id/ql_env_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="变量名"
+            android:hint="自定义变量名"
             android:inputType="text"
             />
 
